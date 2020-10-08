@@ -25,7 +25,7 @@ class AuthService {
       .catch(error=>{return false});
   }
 
-  AdminLogin(username, password) {
+  adminLogin(username, password) {
     return axios
       .get(ADMIN_URL, {
         auth:{

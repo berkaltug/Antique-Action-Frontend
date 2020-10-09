@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AntiqueService from "../service/AntiqueService";
 import AntiqueList from "../components/AntiqueList";
 import AuthService from "../service/AuthService";
+import Navigation from "../components/Navigation";
 
 class HomeScreen extends Component {
 constructor(props) {
@@ -14,7 +15,6 @@ constructor(props) {
   componentDidMount() {
     console.log(AuthService.login("user","user"));
     let response=AntiqueService.getAllAntique(0,'ASC').then(response=>{
-      console.log(response.data)
         this.setState({items:response.data});
     })
     .catch(e=>{
@@ -26,6 +26,7 @@ constructor(props) {
   render() {
     return (
       <>
+      <Navigation/>
         <AntiqueList items={this.state.items}/>
       </>
     );

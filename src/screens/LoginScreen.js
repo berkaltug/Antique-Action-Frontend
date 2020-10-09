@@ -7,35 +7,48 @@ class LoginScreen extends Component {
     this.state = {
       username: "",
       password: "",
-      wrongLogin:false
+      wrongLogin: false
     };
   }
 
-handleUsername=(e)=>{
-  this.setState({username:e.target.value});
-}
+  handleUsername = e => {
+    this.setState({ username: e.target.value });
+  };
 
-handlePassword=(e)=>{
-  this.setState({password:e.target.value});
-}
+  handlePassword = e => {
+    this.setState({ password: e.target.value });
+  };
 
-handleLogin=(e)=>{
-  e.preventDefault();
-  AuthService.login(this.state.username,this.state.password).then(result=>{
-    console.log("reeesuuult" + result);
-    if(result){
-      this.props.history.push("/list");
-    }else{
-      this.setState({wrongLogin:true})
-    }
-  });
+  handleLogin = (e) => {
+    e.preventDefault();
+    AuthService.login(this.state.username, this.state.password).then(result => {
+      console.log("reeesuuult" + result);
+      if (result) {
+        this.props.history.push("/list");
+      } else {
+        this.setState({ wrongLogin: true });
+      }
+    });
+  };
+  handleAdminLogin = (e) => {
+      e.preventDefault();
+      AuthService.adminLogin(this.state.username,this.state.password).then(result => {
+        if(result){
+          this.props.history.push("/dashboard");
+        }else{
+          this.setState({ wrongLogin: true });
+        }
+      })
+  }
 
-
-}
   render() {
     return (
       <div className="container">
-      {this.state.wrongLogin && <div>Wrong Username and Password !</div>}
+        {this.state.wrongLogin && (
+          <div class="alert alert-danger" role="alert">
+            Wrong username and password
+          </div>
+        )}
         <div className="login-layout row">
           <div className="col-md-6">
             <form onSubmit={this.handleLogin}>
@@ -63,7 +76,7 @@ handleLogin=(e)=>{
             </form>
           </div>
           <div className="col-md-6">
-            <form>
+            <form onSubmit={this.handleAdminLogin}>
               <div className="form-group">
                 <label htmlFor="exampleInputUsername2">Admin Username</label>
                 <input

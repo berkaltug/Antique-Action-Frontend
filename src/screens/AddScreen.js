@@ -76,7 +76,7 @@ class AddScreen extends Component {
         file: null,
         deadline: new Date(),
         uploadSuccess: false,
-        errorMessage: response
+        errorMessage: response.data
       });
     });
   };

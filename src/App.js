@@ -22,8 +22,8 @@ export default class App extends Component {
           <Route exact path="/" component={LoginScreen} />
           <Route path="/list" component={HomeScreen} />
           <Route path="/add" component={AddScreen} />
-          <Route path="/update" component={UpdateScreen} />
-          <Route path="/get" component={AntiqueScreen} />
+          <Route path="/update/:id" component={UpdateScreen} />
+          <Route path="/get/:id" component={AntiqueScreen} />
           <Route path="/dashboard" component={AdminScreen} />
         </Switch>
       </div>

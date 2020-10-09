@@ -99,7 +99,6 @@ class LoginScreen extends Component {
                 Submit
               </button>
             </form>
-            <p>{this.state.username}</p>
           </div>
         </div>
       </div>

@@ -46,9 +46,9 @@ class Navigation extends Component {
           {user && (
             <>
               <li clasName="nav-item">
-                <a className="nav-link" onClick={this.handleLogout}>
+                <Link className="nav-link" onClick={this.handleLogout}>
                   Logout
-                </a>
+                </Link>
               </li>
             </>
           )}

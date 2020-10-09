@@ -13,7 +13,6 @@ constructor(props) {
 }
 
   componentDidMount() {
-    console.log(AuthService.login("user","user"));
     let response=AntiqueService.getAllAntique(0,'ASC').then(response=>{
         this.setState({items:response.data});
     })

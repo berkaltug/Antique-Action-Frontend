@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import AuthService from "../service/AuthService";
 
 class Navigation extends Component {
@@ -57,4 +58,4 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
+export default withRouter(Navigation);

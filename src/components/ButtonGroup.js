@@ -9,8 +9,10 @@ class ButtonGroup extends Component {
   }
 
   pressDelete=()=>{
-    AntiqueService.deleteAntique(this.props.id).catch(error=>{
+    AntiqueService.deleteAntique(this.props.id).then(response=>{
       this.handleCallback(true);
+    }).catch(error=>{
+      this.handleCallback(false);
     })
   }
 
@@ -24,7 +26,7 @@ class ButtonGroup extends Component {
       <div class="btn-group" role="group" aria-label="Basic example">
           <Link to={"/get/" +this.props.id} type="button" className="btn btn-primary">See</Link>
           <Link to={"/update/" + this.props.id} type="button" className="btn btn-success">Update</Link>
-          <button type="button" class="btn btn-danger" onClick={this.pressDelete}>delete</button>
+          <button type="button" className="btn btn-danger" onClick={this.pressDelete}>delete</button>
       </div>
       </>
     );

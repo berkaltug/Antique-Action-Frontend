@@ -45,7 +45,7 @@ class Navigation extends Component {
         <div className="navbar-nav ml-auto">
           {user && (
             <>
-              <li clasName="nav-item">
+              <li className="nav-item">
                 <Link className="nav-link" onClick={this.handleLogout}>
                   Logout
                 </Link>

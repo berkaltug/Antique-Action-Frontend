@@ -95,7 +95,7 @@ class AddScreen extends Component {
         <form onSubmit={this.addAntique}>
           <div className="form-group">
             <label htmlFor="name">Antique Name</label>
-            <input type="text" className="form-control" id="name" onChange={this.handleName}/>
+            <input type="text" className="form-control" id="name" onChange={this.handleName} required/>
           </div>
           <div className="form-group">
             <label htmlFor="description">Antique Description</label>
@@ -105,14 +105,15 @@ class AddScreen extends Component {
               className="form-control"
               id="description"
               onChange={this.handleDesc}
+              required
             />
           </div>
           <div className="form-group">
             <label htmlFor="price">Initial Price</label>
-            <input type="number" className="form-control" onChange={this.handlePrice}/>
+            <input type="number" className="form-control" onChange={this.handlePrice} required/>
           </div>
-          <div class="form-group">
-            <label for="image">Select Zip File With Images</label>
+          <div className="form-group">
+            <label htmlFor="image">Select Zip File With Images</label>
             <input
               type="file"
               className="form-control-file"

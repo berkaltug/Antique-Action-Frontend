@@ -5,18 +5,14 @@ import AuthService from "./AuthService";
 class AntiqueService{
 
     getAllAntique(page,sort){
-      let config={auth:AuthService.getCurrentUser()};
-        return http.get(`http://localhost:8080/antique/list?page=${page}&sort=${sort}`,config);
+        return http.get(`http://localhost:8080/antique/list?page=${page}&sort=${sort}`);
     }
 
     getAntique(id){
-      let config={auth:AuthService.getCurrentUser()};
-      return http.get(`http://localhost:8080/antique/get/${id}`,config);
+      return http.get(`http://localhost:8080/antique/get/${id}`);
     }
 
     addAntique(formData){
-      let config={auth:AuthService.getCurrentUser(),};
-      console.log(formData)
       return multipart.post(`http://localhost:8080/antique/add`,formData);
     }
 

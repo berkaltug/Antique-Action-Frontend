@@ -6,7 +6,8 @@ const http=axios.create({
   headers: {
     "Content-type": "application/json",
     'Access-Control-Allow-Origin': '*'
-  }
+  },
+  auth: AuthService.getCurrentUser()
 })
 
 const multipart=axios.create({

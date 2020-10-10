@@ -8,17 +8,27 @@ class AdminScreen extends Component {
     this.state = {
       list: [],
       isError: false,
+      demo: false
     };
   }
-  setError=(value)=>{
-    this.setState({isError:value});
-  }
+  setError = value => {
+    if (value) {
+      AntiqueService.getAllAntique(0, "ASC").then(response => {
+        console.log("updated")
+        this.setState({ list: response.data.content });
+      });
+    } else {
+      this.setState({ isError: value });
+    }
+
+  };
 
   componentDidMount() {
     AntiqueService.getAllAntique(0, "ASC").then(response => {
-      this.setState({ list: response.data });
+      this.setState({ list: response.data.content });
     });
   }
+
   render() {
     return (
       <>

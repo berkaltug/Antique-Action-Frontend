@@ -19,10 +19,9 @@ class LoginScreen extends Component {
     this.setState({ password: e.target.value });
   };
 
-  handleLogin = (e) => {
+  handleLogin = e => {
     e.preventDefault();
     AuthService.login(this.state.username, this.state.password).then(result => {
-      console.log("reeesuuult" + result);
       if (result) {
         this.props.history.push("/list");
       } else {
@@ -30,75 +29,49 @@ class LoginScreen extends Component {
       }
     });
   };
-  handleAdminLogin = (e) => {
-      e.preventDefault();
-      AuthService.adminLogin(this.state.username,this.state.password).then(result => {
-        if(result){
+  handleAdminLogin = e => {
+    e.preventDefault();
+    AuthService.adminLogin(this.state.username, this.state.password).then(
+      result => {
+        if (result) {
           this.props.history.push("/dashboard");
-        }else{
+        } else {
           this.setState({ wrongLogin: true });
         }
-      })
-  }
+      }
+    );
+  };
 
   render() {
     return (
       <div className="container">
         {this.state.wrongLogin && (
-          <div class="alert alert-danger" role="alert">
+          <div className="alert alert-danger" role="alert">
             Wrong username and password
           </div>
         )}
         <div className="login-layout row">
           <div className="col-md-6">
-            <form onSubmit={this.handleLogin}>
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Username</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                  onChange={this.handleUsername}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                  onChange={this.handlePassword}
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </form>
+          <form className="box" onSubmit={this.handleLogin}>
+            <h1>Login</h1>
+            <p className="text-muted">
+              Please enter your username and password!
+            </p>
+            <input type="text" name="" placeholder="Username" onChange={this.handleUsername} />
+            <input type="password" name="" placeholder="Password" onChange={this.handlePassword}/>
+            <input type="submit" name="" value="Login" />
+          </form>
           </div>
           <div className="col-md-6">
-            <form onSubmit={this.handleAdminLogin}>
-              <div className="form-group">
-                <label htmlFor="exampleInputUsername2">Admin Username</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputUsername2"
-                  onChange={this.handleUsername}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="exampleInputPassword2">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword2"
-                  onChange={this.handlePassword}
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </form>
+              <form className="box" onSubmit={this.handleAdminLogin}>
+                <h1>Admin Login</h1>
+                <p className="text-muted">
+                  Please enter your admin username and password!
+                </p>
+                <input type="text" name="" placeholder="Username" onChange={this.handleUsername} />
+                <input type="password" name="" placeholder="Password" onChange={this.handlePassword}/>
+                <input type="submit" name="" value="Login" />
+              </form>
           </div>
         </div>
       </div>

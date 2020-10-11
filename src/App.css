@@ -1,10 +1,13 @@
-.App {
-  background-image: url("./1014.png");
-  background-repeat: repeat;
-}
+
 body{
   background-image: url("./1014.png");
   background-repeat: repeat;
+}
+.card-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .card-img-top{
@@ -21,16 +24,22 @@ body{
   flex:1;
   display:grid;
   justify-content: space-around;
-  grid-row-gap:1rem;
-  grid-template-columns: auto auto auto auto;
   text-align: center;
   margin-top: 4rem;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  grid-row-gap: 20px;
 }
 .my-img{
   width: 400px;
   height: 250px;
 }
-
+.login-layout{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
 .my-jumbotron{
   background-color: rgba(0, 0, 0, 0.50);
   border-radius: 10px;
@@ -90,7 +99,7 @@ body{
     text-align: center;
     border: 2px solid #3498db;
     padding: 10px 10px;
-    width: 250px;
+    width: 230px;
     outline: none;
     color: white;
     border-radius: 24px;
@@ -105,7 +114,7 @@ body{
 
 .box input[type="text"]:focus,
 .box input[type="password"]:focus {
-    width: 300px;
+    width: 260px;
     border-color: #2ecc71
 }
 

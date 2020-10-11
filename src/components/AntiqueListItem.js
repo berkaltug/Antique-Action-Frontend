@@ -21,13 +21,13 @@ export default class AntiqueListItem extends Component {
       }
     };
     return (
-      <div>
+      <div className="card-container">
         <div className="card" style={{ width: "14rem" }}>
           <img
             src={
               this.props.image
                 ? "http://localhost:8080/" + this.props.image
-                : "https://via.placeholder.com/175"
+                : "https://loremflickr.com/175/150/paris/all"
             }
             className="card-img-top"
             alt="..."

@@ -81,7 +81,7 @@ class HomeScreen extends Component {
           <div className="col-md-6 col-sm-12">
             <form
               onSubmit={this.handleSubmit}
-              className="d-flex m-3 flex-row justify-content-around align-items-center"
+              className="d-flex  flex-row justify-content-around align-items-center"
             >
               <div className="input-group mb-3">
                 <input

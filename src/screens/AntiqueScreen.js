@@ -135,13 +135,13 @@ class AntiqueScreen extends Component {
                     return b - a;
                   }) &&
                   this.state.pastBids.map((bid, index) => {
-                    return <li className="list-group-item">{bid}</li>;
+                    return <li className="list-group-item">{bid} $</li>;
                   })}
               </ul>
             </div>
             <div className="col-md-6 d-flex flex-column justify-content-center align-items-center text-center">
               {AuthService.getCurrentUser().username==="admin" && (<h3>Admin can not make a bid</h3>)}
-              {AuthService.getCurrentUser()==="user" && (
+              {AuthService.getCurrentUser().username==="user" && (
                 <>
                 {this.state.bidSuccess && (
                   <div className="alert alert-success">Bid is successful</div>

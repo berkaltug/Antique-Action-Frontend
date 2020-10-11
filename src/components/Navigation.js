@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import AuthService from "../service/AuthService";
+import { Navbar, Nav } from "react-bootstrap";
 
 class Navigation extends Component {
   constructor(props) {
@@ -19,41 +20,47 @@ class Navigation extends Component {
   render() {
     const user = AuthService.getCurrentUser();
     return (
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <span className="navbar-brand">Antique Auction Bazaar</span>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/list"} className="nav-link">
-              Antique List
-            </Link>
-          </li>
-          {user && user.username === "admin" && (
-            <>
+      <>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand href="#home">Antique Auction Market</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
               <li className="nav-item">
-                <Link to={"/add"} className="nav-link">
-                  Add Antique
+                <Link to={"/list"} className="nav-link">
+                  Antique List
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to={"/dashboard"} className="nav-link">
-                  Dashboard
-                </Link>
-              </li>
-            </>
-          )}
-        </div>
-        <div className="navbar-nav ml-auto">
-          {user && (
-            <>
-              <li className="nav-item">
-                <Link className="nav-link" onClick={this.handleLogout}>
-                  Logout
-                </Link>
-              </li>
-            </>
-          )}
-        </div>
-      </nav>
+              {user && user.username === "admin" && (
+                <>
+                  <li className="nav-item">
+                    <Link to={"/add"} className="nav-link">
+                      Add Antique
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to={"/dashboard"} className="nav-link">
+                      Dashboard
+                    </Link>
+                  </li>
+                </>
+              )}
+            </Nav>
+            <Nav className="ml-auto">
+              {user && (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" onClick={this.handleLogout}>
+                      Logout
+                    </Link>
+                  </li>
+                </>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        ;
+      </>
     );
   }
 }

@@ -1,5 +1,6 @@
-This is a frontend implementation for a spring boot app which is here [Antique Auction App](https://github.com/berkaltug/Antique-Action-Frontend).
-
+This is a frontend implementation for a spring boot restful api which is here [Antique Auction App](https://github.com/berkaltug/Antique-Action-Frontend).
+In order to work properly both spring app and this react app needs to be running simultaneously.
+So clone both repository.
 ## Building project
 First clone this repo into your working directory.
 Then open terminal and run 'npm install' in project directory.

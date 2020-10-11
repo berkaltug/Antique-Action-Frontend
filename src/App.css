@@ -22,16 +22,52 @@ body{
   display:grid;
   justify-content: space-around;
   grid-row-gap:1rem;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto;
   text-align: center;
   margin-top: 4rem;
 }
+.my-img{
+  width: 400px;
+  height: 250px;
+}
 
+.my-jumbotron{
+  background-color: rgba(0, 0, 0, 0.50);
+  border-radius: 10px;
+  height:350px;
+}
+
+.count-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #cc4420;
+  font-size: 1.8rem;
+  color:white;
+  text-shadow: 1px 1px 5px;
+  border-radius: 10px;
+}
+.count-box2{
+  margin-bottom:0.5rem;
+  padding: 0.2rem;
+  background-color: #cc4420;
+  font-size: 1rem;
+  color:white;
+  text-shadow: 1px 1px 5px;
+  border-radius: 10px;
+}
 .table.table-striped {
   table-layout:fixed;
   width: 100%;
 }
-
+.list-group{
+  height: 300px;
+  max-height: 300px;
+  overflow:scroll;
+  -webkit-overflow-scrolling: touch;
+}
 .tr-desc{
     text-overflow: ellipsis;
     white-space: nowrap;

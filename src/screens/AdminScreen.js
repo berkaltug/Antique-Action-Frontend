@@ -13,7 +13,7 @@ class AdminScreen extends Component {
   }
   setError = value => {
     if (value) {
-      AntiqueService.getAllAntique(0, "ASC").then(response => {
+      AntiqueService.getAllAntique(1, "DESC").then(response => {
         console.log("updated")
         this.setState({ list: response.data.content });
       });
@@ -24,7 +24,7 @@ class AdminScreen extends Component {
   };
 
   componentDidMount() {
-    AntiqueService.getAllAntique(0, "ASC").then(response => {
+    AntiqueService.getAllAntique(1, "DESC").then(response => {
       this.setState({ list: response.data.content });
     });
   }

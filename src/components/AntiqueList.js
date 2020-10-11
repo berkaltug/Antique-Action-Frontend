@@ -11,7 +11,10 @@ class AntiqueList extends Component {
       <div className="my-row">
       {this.props.items && this.props.items.map((item,index)=>{
         return(
-          <AntiqueListItem name={item.name}
+          <AntiqueListItem
+          key={index}
+          id={item.id}
+          name={item.name}
           description={item.description}
           image={item.displayImage}
           price={item.price}

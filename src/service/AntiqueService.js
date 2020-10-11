@@ -8,6 +8,10 @@ class AntiqueService{
         return http.get(`http://localhost:8080/antique/list?page=${page}&sort=${sort}`);
     }
 
+    searchAntique(page,sort,string){
+      return http.get(`http://localhost:8080/antique/search?page=${page}&sort=${sort}&str=${string}`);
+    }
+
     getAntique(id){
       return http.get(`http://localhost:8080/antique/get/${id}`);
     }

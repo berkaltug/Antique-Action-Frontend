@@ -11,7 +11,7 @@ class AddScreen extends Component {
       name: "",
       desc: "",
       price: "",
-      file: null,
+      file: undefined,
       deadline: new Date(),
       uploadSuccess: false,
       errorMessage: ""
@@ -59,24 +59,24 @@ class AddScreen extends Component {
 
     AntiqueService.addAntique(formData).then(response => {
       this.setState({
-        name: "",
-        desc: "",
-        price: "",
-        file: null,
+        name: " ",
+        desc: " ",
+        price: 0,
+        file: undefined,
         deadline: new Date(),
         uploadSuccess: true,
         errorMessage: ""
       });
-    }).catch((response)=>{
-      console.log(JSON.stringify(response))
+    }).catch((error)=>{
+      console.log(error.response.data)
       this.setState({
-        name: "",
-        desc: "",
-        price: "",
-        file: null,
+        name: " ",
+        desc: " ",
+        price: 0,
+        file: undefined,
         deadline: new Date(),
         uploadSuccess: false,
-        errorMessage: response.data
+        errorMessage: error.response.data
       });
     });
   };
@@ -95,7 +95,7 @@ class AddScreen extends Component {
         <form onSubmit={this.addAntique}>
           <div className="form-group">
             <label htmlFor="name">Antique Name</label>
-            <input type="text" className="form-control" id="name" onChange={this.handleName} required/>
+            <input type="text" className="form-control" id="name" value={this.state.name} onChange={this.handleName} required/>
           </div>
           <div className="form-group">
             <label htmlFor="description">Antique Description</label>
@@ -106,11 +106,13 @@ class AddScreen extends Component {
               id="description"
               onChange={this.handleDesc}
               required
+              value={this.state.desc}
+              required
             />
           </div>
           <div className="form-group">
             <label htmlFor="price">Initial Price</label>
-            <input type="number" className="form-control" onChange={this.handlePrice} required/>
+            <input type="number" className="form-control" value={this.state.price} onChange={this.handlePrice} required/>
           </div>
           <div className="form-group">
             <label htmlFor="image">Select Zip File With Images</label>

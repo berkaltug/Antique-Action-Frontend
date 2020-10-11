@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Countdown , {zeroPad } from "react-countdown";
+import { Link } from "react-router-dom";
 export default class AntiqueListItem extends Component {
   constructor(props) {
     super(props);
@@ -34,8 +35,11 @@ export default class AntiqueListItem extends Component {
           <div className="card-body">
             <h5 className="card-title">{this.props.name}</h5>
             <p>{this.props.description}</p>
-            <p>Ending In : </p>
+            <p style={{fontWeight:"bold"}}>Ending In : </p>
+            <div className="count-box2">
             <Countdown date={this.props.deadline} renderer={renderer} />
+            </div>
+
             <div
               style={{
                 display: "flex",
@@ -45,8 +49,10 @@ export default class AntiqueListItem extends Component {
                 alignSelf: "stretch"
               }}
             >
-              <span className="card-text">{this.props.price}</span>
-              <button className="btn btn-primary">Bid Now</button>
+              <span style={{fontWeight:"bold"}}>{this.props.price} $</span>
+              <Link to={"/get/" +this.props.id} type="button" className="btn btn-primary">
+              Bid Now
+              </Link>
             </div>
           </div>
         </div>

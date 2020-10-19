@@ -1,45 +1,64 @@
 import axios from "axios";
+import { userHttp } from "../http-common.js";
 
 const API_URL = "http://localhost:8080/antique/login";
-const ADMIN_URL= "http://localhost:8080/antique/admin/login"
+const ADMIN_URL = "http://localhost:8080/antique/admin/login";
 
 class AuthService {
-  login(username, password) {
-    return axios
+   async login(username, password) {
+    return await axios
       .get(API_URL, {
         headers: {
           "Content-type": "application/json",
-          'Access-Control-Allow-Origin': '*'
+          "Access-Control-Allow-Origin": "*"
         },
-        auth:{
-          username:username,
-          password:password
+        auth: {
+          username: username,
+          password: password
         }
       })
       .then(response => {
-        if (response.status===200) {
-          localStorage.setItem("auth",JSON.stringify({username:username,password:password}));
+        if (response.status === 200) {
+          localStorage.setItem(
+            "auth",
+            JSON.stringify({ username: username, password: password })
+          );
           return true;
         }
       })
-      .catch(error=>{return false});
+      .catch(error => {
+        return false;
+      });
   }
 
-  adminLogin(username, password) {
-    return axios
+  async adminLogin(username, password) {
+    return await axios
       .get(ADMIN_URL, {
-        auth:{
-          username:username,
-          password:password
+        auth: {
+          username: username,
+          password: password
         }
       })
       .then(response => {
-        if (response.status===200) {
-          localStorage.setItem("auth",JSON.stringify({username:username,password:password}));
+        if (response.status === 200) {
+          localStorage.setItem(
+            "auth",
+            JSON.stringify({ username: username, password: password })
+          );
           return true;
         }
       })
-      .catch(error=>{return false});
+      .catch(error => {
+        return false;
+      });
+  }
+
+  register(username, email, password) {
+    return userHttp.post('/register', {
+      username: username,
+      email: email,
+      password: password
+    });
   }
 
   logout() {
@@ -47,7 +66,7 @@ class AuthService {
   }
 
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('auth'));  
+    return JSON.parse(localStorage.getItem("auth"));
   }
 }
 

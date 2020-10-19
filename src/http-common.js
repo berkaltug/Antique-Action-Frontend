@@ -19,4 +19,12 @@ const multipart=axios.create({
   auth: AuthService.getCurrentUser()
 })
 
-export {http,multipart};
+const userHttp=axios.create({
+  baseUrl:"http://localhost:8080/user",
+  headers: {
+    "Content-type": "application/json",
+    'Access-Control-Allow-Origin': '*'
+  }
+})
+
+export {http,multipart,userHttp};

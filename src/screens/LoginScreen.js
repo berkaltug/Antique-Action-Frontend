@@ -52,7 +52,7 @@ class LoginScreen extends Component {
         )}
         <div className="login-layout row">
           <div className="col-md-6">
-          <form className="box" onSubmit={this.handleLogin}>
+          <form className="box h-100" onSubmit={this.handleLogin}>
             <h1>Login</h1>
             <p className="text-muted">
               Please enter your username and password!
@@ -63,7 +63,7 @@ class LoginScreen extends Component {
           </form>
           </div>
           <div className="col-md-6">
-              <form className="box" onSubmit={this.handleAdminLogin}>
+              <form className="box h-100" onSubmit={this.handleAdminLogin}>
                 <h1>Admin Login</h1>
                 <p className="text-muted">
                   Please enter your admin username and password!

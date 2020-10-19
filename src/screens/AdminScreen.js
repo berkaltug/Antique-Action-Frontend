@@ -2,32 +2,48 @@ import React, { Component } from "react";
 import Navigation from "../components/Navigation";
 import ButtonGroup from "../components/ButtonGroup";
 import AntiqueService from "../service/AntiqueService";
+import Pagination from "react-js-pagination";
 class AdminScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       list: [],
       isError: false,
-      demo: false
+      demo: false,
+      totalPages: null,
+      totalItemsCount: null,
+      itemsCountPerPage: null,
+      activePage: 1
     };
   }
   setError = value => {
     if (value) {
       AntiqueService.getAllAntique(1, "DESC").then(response => {
-        console.log("updated")
+        console.log("updated");
         this.setState({ list: response.data.content });
       });
     } else {
       this.setState({ isError: value });
     }
-
   };
 
   componentDidMount() {
     AntiqueService.getAllAntique(1, "DESC").then(response => {
-      this.setState({ list: response.data.content });
+      this.setState({
+        list: response.data.content,
+        totalPages: response.data.totalPages,
+        totalItemsCount: response.data.totalElements,
+        itemsCountPerPage: response.data.size
+      });
     });
   }
+
+  handlePageChange = pageNumber => {
+    this.setState({ activePage: pageNumber });
+    AntiqueService.getAllAntique(pageNumber, "DESC").then(response => {
+      this.setState({ list: response.data.content });
+    });
+  };
 
   render() {
     return (
@@ -76,6 +92,19 @@ class AdminScreen extends Component {
               )}
             </tbody>
           </table>
+          <div className="row">
+            <div className="col-md-6 offset-md-3 d-flex justify-content-center  align-items-center">
+              <Pagination
+                activePage={this.state.activePage}
+                itemsCountPerPage={this.state.itemsCountPerPage}
+                totalItemsCount={this.state.totalItemsCount}
+                pageRangeDisplayed={3}
+                itemClass="page-item"
+                linkClass="page-link"
+                onChange={this.handlePageChange}
+              />
+            </div>
+          </div>
         </div>
       </>
     );

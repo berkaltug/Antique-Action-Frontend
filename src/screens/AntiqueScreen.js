@@ -31,12 +31,13 @@ class AntiqueScreen extends Component {
     this.connectToWsChannel();
 
   }
-  connectToWsChannel(){
+  connectToWsChannel=()=>{
     let sockjs = new SockJS("http://localhost:8080/antique-app-ws");
     let stompClient = Stomp.over(sockjs);
     stompClient.connect({},()=>{
-      stompClient.subscribe("/antique-topic/bid",(data)=>{
-        this.setState({pastBids:[data.latestBid,...this.state.pastBids]})
+      stompClient.subscribe(`/antique-topic/bid/${this.state.id}`,(data)=>{
+        const dataBody=JSON.parse(data.body);
+        this.setState({pastBids:[dataBody.bid,...this.state.pastBids]})
       })
     })
 
@@ -72,7 +73,7 @@ class AntiqueScreen extends Component {
     AntiqueService.makeBid(this.props.match.params.id, this.state.bid)
       .then(response => {
         this.setState({ bidSuccess: true, bidError: false });
-        this.getRequest();
+        // this.getRequest();
       })
       .catch(error => {
         this.setState({

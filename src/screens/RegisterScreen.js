@@ -1,23 +1,50 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import AuthService from "../service/AuthService";
+import axios from "axios";
+
 class RegisterScreen extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      errorMessage:"",
+      successMessage:""
     };
   }
+
   handleUsername = e => {
     this.setState({ username: e.target.value });
+    console.log(this.state.username)
   };
+
   handleEmail = e => {
     this.setState({ email: e.target.value });
   };
+
   handlePassword = e => {
     this.setState({ password: e.target.value });
   };
+
+  formSubmit = e =>{
+    e.preventDefault();
+    const username=this.state.username;
+    const email=this.state.email;
+    const password=this.state.password;
+    axios.post('http://localhost:8080/user/register',
+        {
+          username:username,
+          email:email,
+          password:password
+        }).then(response=>{
+          this.setState({successMessage:response.data,errorMessage:""})
+        }).catch(error=>{
+          this.setState({errorMessage:error.response.data,successMessage:""})
+        })
+  }
 
   render() {
     return (
@@ -26,7 +53,15 @@ class RegisterScreen extends Component {
           <div className="row justify-content-center align-items-center h-100">
             <div className="col-md-3"></div>
             <div className="col-md-6 d-flex">
-              <form className="w-100" onSubmit={""}>
+
+              <form className="w-100" onSubmit={this.formSubmit}>
+              {this.state.errorMessage !== "" && (
+                <div className="form-group"><div className="alert alert-danger">{this.state.errorMessage}</div></div>
+
+              )}
+              {this.state.successMessage !== "" && (
+                    <div className="form-group"><div className="alert alert-success">{this.state.successMessage}</div></div>
+              )}
                 <div className="form-group">
                   <label htmlFor="username">Username:</label>
                   <input

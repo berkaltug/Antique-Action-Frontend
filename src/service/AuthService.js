@@ -19,7 +19,7 @@ class AuthService {
       })
       .then(response => {
         if (response.status === 200) {
-          localStorage.setItem(
+           localStorage.setItem(
             "auth",
             JSON.stringify({ username: username, password: password })
           );
@@ -32,7 +32,7 @@ class AuthService {
   }
 
   async adminLogin(username, password) {
-    return await axios
+    return  await axios
       .get(ADMIN_URL, {
         auth: {
           username: username,
@@ -41,7 +41,7 @@ class AuthService {
       })
       .then(response => {
         if (response.status === 200) {
-          localStorage.setItem(
+         localStorage.setItem(
             "auth",
             JSON.stringify({ username: username, password: password })
           );

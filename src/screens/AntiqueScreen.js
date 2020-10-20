@@ -5,7 +5,8 @@ import AntiqueService from "../service/AntiqueService";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import AuthService from "../service/AuthService";
-
+var SockJS = require('sockjs-client');
+var Stomp = require('stompjs');
 class AntiqueScreen extends Component {
   constructor(props) {
     super(props);
@@ -27,11 +28,27 @@ class AntiqueScreen extends Component {
 
   componentDidMount() {
     this.getRequest();
+    this.connectToWsChannel();
+
   }
+  connectToWsChannel(){
+    let sockjs = new SockJS("http://localhost:8080/antique-app-ws");
+    let stompClient = Stomp.over(sockjs);
+    stompClient.connect({},()=>{
+      stompClient.subscribe("/antique-topic/bid",(data)=>{
+        this.setState({pastBids:[data.latestBid,...this.state.pastBids]})
+      })
+    })
+
+
+    // sockjs.onmessage= (e) => {
+    //   console.log(e);
+    // }
+  }
+
   getRequest() {
     AntiqueService.getAntique(this.props.match.params.id).then(response => {
       const antique = response.data;
-      console.log(antique.imagePath);
       this.setState({
         id: antique.id,
         name: antique.name,

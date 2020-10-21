@@ -132,7 +132,7 @@ class AddScreen extends Component {
               showTimeSelect
               dateFormat="yy-MM-dd HH:mm"
               timeFormat="HH:mm"
-              timeIntervals={30}
+              timeIntervals={5}
             />
           </div>
             <button type="submit" className="btn btn-primary">

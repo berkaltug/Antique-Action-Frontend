@@ -40,11 +40,6 @@ class AntiqueScreen extends Component {
         this.setState({pastBids:[dataBody.bid,...this.state.pastBids]})
       })
     })
-
-
-    // sockjs.onmessage= (e) => {
-    //   console.log(e);
-    // }
   }
 
   getRequest() {
@@ -159,7 +154,7 @@ class AntiqueScreen extends Component {
             </div>
             <div className="col-md-6 d-flex flex-column justify-content-center align-items-center text-center">
               {AuthService.getCurrentUser().username==="admin" && (<h3>Admin can not make a bid</h3>)}
-              {AuthService.getCurrentUser().username==="user" && (
+              {AuthService.getCurrentUser().username!=="admin" && (
                 <>
                 {this.state.bidSuccess && (
                   <div className="alert alert-success">Bid is successful</div>

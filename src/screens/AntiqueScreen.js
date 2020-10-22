@@ -37,7 +37,10 @@ class AntiqueScreen extends Component {
     stompClient.connect({},()=>{
       stompClient.subscribe(`/antique-topic/bid/${this.state.id}`,(data)=>{
         const dataBody=JSON.parse(data.body);
-        this.setState({pastBids:[dataBody.bid,...this.state.pastBids]})
+        this.setState({
+          pastBids:[dataBody.bid,...this.state.pastBids],
+          latestBid:dataBody.bid
+        })
       })
     })
   }
@@ -92,11 +95,14 @@ class AntiqueScreen extends Component {
         );
       }
     };
+    
     return (
       <>
         <Navigation />
         <div className="container">
           <div className="row">
+
+
             <div className="col-md-6 d-flex flex-column justify-content-center align-items-center">
               <Carousel dynamicHeight={true}>
                 {this.state.images &&
@@ -119,6 +125,8 @@ class AntiqueScreen extends Component {
                   </>
               )}
             </div>
+
+
             <div className="col-md-6 d-flex flex-column justify-content-center align-items-center my-jumbotron">
               <h2 style={{ color: "#c62900" }}>{this.state.name}</h2>
               <p style={{ fontSize: "1.3rem" }}>{this.state.desc}</p>
@@ -152,9 +160,11 @@ class AntiqueScreen extends Component {
                   })}
               </ul>
             </div>
+
+
             <div className="col-md-6 d-flex flex-column justify-content-center align-items-center text-center">
               {AuthService.getCurrentUser().username==="admin" && (<h3>Admin can not make a bid</h3>)}
-              {AuthService.getCurrentUser().username!=="admin" && (
+              {AuthService.getCurrentUser().username!=="admin" && (new Date() < new Date(this.state.deadline)) &&  (
                 <>
                 {this.state.bidSuccess && (
                   <div className="alert alert-success">Bid is successful</div>

@@ -27,4 +27,13 @@ const userHttp=axios.create({
   }
 })
 
+const saleHttp=axios.create({
+  baseURL: "http://localhost:8080/sale",
+  headers: {
+    "Content-type": "application/json",
+    'Access-Control-Allow-Origin': '*'
+  },
+  auth: AuthService.getCurrentUser()
+})
+
 export {http,multipart,userHttp};

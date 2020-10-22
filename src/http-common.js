@@ -36,4 +36,4 @@ const saleHttp=axios.create({
   auth: AuthService.getCurrentUser()
 })
 
-export {http,multipart,userHttp};
+export {http,multipart,userHttp,saleHttp};

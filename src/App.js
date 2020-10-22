@@ -7,7 +7,7 @@ import AntiqueScreen from "./screens/AntiqueScreen";
 import AdminScreen from "./screens/AdminScreen";
 import UpdateScreen from "./screens/UpdateScreen";
 import RegisterScreen from "./screens/RegisterScreen";
-
+import ProfileScreen from "./screens/ProfileScreen";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 export default class App extends Component {
@@ -26,6 +26,7 @@ export default class App extends Component {
           <Route path="/update/:id" component={UpdateScreen} />
           <Route path="/get/:id" component={AntiqueScreen} />
           <Route path="/dashboard" component={AdminScreen} />
+          <Route path="/profile" component={ProfileScreen}/>
         </Switch>
       </div>
     );

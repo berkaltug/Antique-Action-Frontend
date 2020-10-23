@@ -5,6 +5,7 @@ import AntiqueService from "../service/AntiqueService";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import AuthService from "../service/AuthService";
+import SaleService from "../service/SaleService";
 var SockJS = require('sockjs-client');
 var Stomp = require('stompjs');
 class AntiqueScreen extends Component {
@@ -22,19 +23,22 @@ class AntiqueScreen extends Component {
       bid: null,
       bidSuccess: false,
       bidError: false,
-      message: ""
+      message: "",
+      buyer:null,
+      buyTime:null,
     };
   }
 
-  componentDidMount() {
-    this.getRequest();
-    this.connectToWsChannel();
+    async componentDidMount() {
+     await this.getRequest();
+     await this.connectToWsChannel();
+
 
   }
-  connectToWsChannel=()=>{
+  connectToWsChannel= async () =>{
     let sockjs = new SockJS("http://localhost:8080/antique-app-ws");
     let stompClient = Stomp.over(sockjs);
-    stompClient.connect({},()=>{
+    await stompClient.connect({},()=>{
       stompClient.subscribe(`/antique-topic/bid/${this.state.id}`,(data)=>{
         const dataBody=JSON.parse(data.body);
         this.setState({
@@ -45,8 +49,8 @@ class AntiqueScreen extends Component {
     })
   }
 
-  getRequest() {
-    AntiqueService.getAntique(this.props.match.params.id).then(response => {
+  async getRequest() {
+    await AntiqueService.getAntique(this.props.match.params.id).then(response => {
       const antique = response.data;
       this.setState({
         id: antique.id,
@@ -61,6 +65,24 @@ class AntiqueScreen extends Component {
     });
   }
 
+getResults = async () => {
+  SaleService.getAntiqueSale(this.state.id)
+    .then(response => {
+      console.log(response.data);
+      if (response.status === 200) {
+        this.setState({
+          latestBid: response.data.price,
+          buyer: response.data.buyer,
+          buyTime: response.data.date
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error.response);
+    });
+};
+
+
   handleInput = (e) => {
     this.setState({ bid: e.target.value });
   };
@@ -71,7 +93,6 @@ class AntiqueScreen extends Component {
     AntiqueService.makeBid(this.props.match.params.id, this.state.bid)
       .then(response => {
         this.setState({ bidSuccess: true, bidError: false });
-        // this.getRequest();
       })
       .catch(error => {
         this.setState({
@@ -84,7 +105,7 @@ class AntiqueScreen extends Component {
   render() {
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
       if (completed) {
-        // Render a complete state
+
         return <span>Ended</span>;
       } else {
         // Render a countdown
@@ -95,7 +116,7 @@ class AntiqueScreen extends Component {
         );
       }
     };
-    
+
     return (
       <>
         <Navigation />
@@ -140,6 +161,7 @@ class AntiqueScreen extends Component {
                 <Countdown
                   date={new Date(this.state.deadline)}
                   renderer={renderer}
+                  onComplete={this.getResults}
                 />
               </div>
             </div>
@@ -186,6 +208,15 @@ class AntiqueScreen extends Component {
                     </button>
                   </div>
                 </form>
+                </>
+              )}
+
+              {this.state.buyer && this.state.buyTime && (
+                <>
+                <h2>And The Winner Is</h2>
+                  <p style={{fontSize:"1.8rem"}}>{this.state.buyer}</p>
+                  <p style={{fontSize:"1.5rem"}}>for {this.state.latestBid} $</p>
+                  <p style={{fontSize:"1.5rem"}}>on {this.state.buyTime}</p>
                 </>
               )}
             </div>

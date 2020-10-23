@@ -27,8 +27,8 @@ class AdminScreen extends Component {
     }
   };
 
-  componentDidMount() {
-    AntiqueService.getAllAntique(1, "DESC").then(response => {
+  async componentDidMount() {
+    await AntiqueService.getAllAntique(1, "DESC").then(response => {
       this.setState({
         list: response.data.content,
         totalPages: response.data.totalPages,

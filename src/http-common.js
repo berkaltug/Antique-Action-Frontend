@@ -7,7 +7,7 @@ const http=axios.create({
     "Content-type": "application/json",
     'Access-Control-Allow-Origin': '*'
   },
-  auth: AuthService.getCurrentUser()
+  auth:AuthService.getCurrentUser()
 })
 
 const multipart=axios.create({

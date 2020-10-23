@@ -19,7 +19,7 @@ class AuthService {
       })
       .then(response => {
         if (response.status === 200) {
-           localStorage.setItem(
+            localStorage.setItem(
             "auth",
             JSON.stringify({ username: username, password: password })
           );
@@ -65,7 +65,7 @@ class AuthService {
     localStorage.removeItem("auth");
   }
 
-  getCurrentUser() {
+   getCurrentUser() {
     return JSON.parse(localStorage.getItem("auth"));
   }
 }

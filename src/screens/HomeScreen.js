@@ -19,12 +19,12 @@ class HomeScreen extends Component {
     };
   }
 
-  componentDidMount() {
-    this.fetchAntiques(1);
+  async componentDidMount() {
+    await this.fetchAntiques(1);
   }
 
-  fetchAntiques(pageNumber) {
-    let response = AntiqueService.getAllAntique(pageNumber, this.state.order)
+  async fetchAntiques(pageNumber) {
+     await AntiqueService.getAllAntique(pageNumber, this.state.order)
       .then(response => {
         this.setState({
           items: response.data.content,

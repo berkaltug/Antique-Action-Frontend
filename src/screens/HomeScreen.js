@@ -38,9 +38,9 @@ class HomeScreen extends Component {
       });
   }
 
-  handlePageChange = pageNumber => {
+  handlePageChange = async pageNumber => {
     this.setState({ activePage: pageNumber });
-    this.fetchAntiques(pageNumber);
+    await this.fetchAntiques(pageNumber);
   };
 
   handleOrderSelect = e => {
@@ -55,9 +55,9 @@ class HomeScreen extends Component {
     this.searchAntique();
   };
 
-  searchAntique = (pageNumber = 1) => {
+  searchAntique = async (pageNumber = 1) => {
     this.setState({ activePage: pageNumber});
-    AntiqueService.searchAntique(
+    await AntiqueService.searchAntique(
       pageNumber,
       this.state.order,
       this.state.string
